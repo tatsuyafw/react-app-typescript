@@ -8,21 +8,17 @@ type SquareProps = {
   onClick: () => void
 };
 
-class Square extends React.Component<SquareProps> {
-  constructor(props: SquareProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <button
-        className="square"
-        onClick={() => this.props.onClick()}
-      >
-        {this.props.value}
-      </ button>
-    );
-  }
+const Square = (props: SquareProps) => {
+  return (
+    <button
+      className="square"
+      onClick={() => props.onClick()}
+    >
+      {props.value}
+    </ button>
+  );
 }
+
 
 type BoardState = {
   squares: Array<string | null>
