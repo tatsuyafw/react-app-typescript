@@ -21,20 +21,25 @@ const Square = (props: SquareProps) => {
 
 type BoardState = {
   squares: Array<string | null>
+  xIsNext: boolean
 }
 
 class Board extends React.Component<any, BoardState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      xIsNext: true
     }
   }
 
   handleClick(i: number): void {
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
-    this.setState({ squares })
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares,
+      xIsNext: !this.state.xIsNext
+    })
   }
 
   renderSquare(i: number) {
@@ -45,7 +50,7 @@ class Board extends React.Component<any, BoardState> {
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
 
     return (
       <div>
